@@ -1,3 +1,11 @@
+# Notes during the process of doing the project
+I started by taking a good time to make it run locally, as there were a lot of dependecies and devices I did not have access to. I created a stub of @beam/storage and created a tsconfig.json, .env and a package.json file. After doing these things I was able to run it locally using "npm run start", but got these 2 lines repeating in the terminal: 
+Client beam_tester_mqtt_1863d6cf02e18 error AggregateError (broker: mqtt://localhost:1883)
+Client beam_tester_mqtt_1863d6cf02e18 is now offline (broker: mqtt://localhost:1883).
+I created the first draft of turnOffDevicesAndVerifyResponse, forked the turnOnDevicesAndVerifyResponse function and changes names and made it publish off instead. 
+
+
+
 # Description
 
 We have a function startRttTest in roundTripTimeTest to test how fast devices can turn on, using the method turnOnDevicesAndVerifyResponse. 

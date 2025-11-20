@@ -1,0 +1,43 @@
+[
+    {
+        "startTime": 1763641839538,
+        "id": "test-device",
+        "deltas": {
+            "meter": {
+                "min": 1501,
+                "max": 1501,
+                "average": 1501
+            }
+        },
+        "boostCapacity": 100,
+        "data": [
+            {
+                "meterTimestamp": 1763641841039,
+                "deltaMeter": 1501,
+                "power": 100
+            }
+        ],
+        "totalTestTime": 4002
+    }
+][
+    {
+        "startTime": 1763641876941,
+        "id": "test-device",
+        "deltas": {
+            "meter": {
+                "min": 1500,
+                "max": 1500,
+                "average": 1500
+            }
+        },
+        "boostCapacity": 100,
+        "data": [
+            {
+                "meterTimestamp": 1763641878441,
+                "deltaMeter": 1500,
+                "power": 100
+            }
+        ],
+        "totalTestTime": 4002
+    }
+]

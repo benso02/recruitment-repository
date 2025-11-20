@@ -11,7 +11,7 @@ import {
 } from '@src/types';
 import { formatResponseTimeResults } from '../util';
 import { DeviceMessageAdapter } from '@src/deviceMessage/adapter';
-import { turnOnDevicesAndVerifyResponse } from '@src/controlDevice/controlDevice';
+import { turnOnDevicesAndVerifyResponse, turnOffDevicesAndVerifyResponse } from '@src/controlDevice/controlDevice';
 
 export const startRttTest = async (
   storage: StorageAdapter,
@@ -31,7 +31,7 @@ export const startRttTest = async (
       for (let i = 0; i < iterations; i++) {
         console.log(`Iteration ${i + 1}...`);
 
-        const responseOnTurnOn = await turnOnDevicesAndVerifyResponse(
+        const responseOnTurnOn = await turnOffDevicesAndVerifyResponse(
           storage,
           messageAdapter,
           device.id,

@@ -5,7 +5,7 @@ import { Adapters } from '@src/types';
 import { addRestRoutes } from '@src/rest';
 import { messageAdapter } from '@src/deviceMessage';
 
-const PORT_HTTP = 5000;
+const PORT_HTTP = 5050;
 
 export const startServer = async () => {
   const server = new Koa();

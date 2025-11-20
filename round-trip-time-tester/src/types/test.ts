@@ -10,6 +10,9 @@ export type TestParameters = {
   iterations: number;
   boostTimeSeconds: number;
   deviceIds?: string[];
+  deviceId?: string;
+  isBatchTest?: boolean;
+  
 };
 
 export type RoundTripTestResponse = {

@@ -39,7 +39,7 @@ export const startRttTest = async (
         );
 
         if (!responseOnTurnOn) {
-          throw new Error(`The device: ${deviceId} is already on, so RTT results cannot be verified`);
+          throw new Error(`The device: ${device.id} is already on, so RTT results cannot be verified`);
         }
 
         const { messageSentAt, meterDataFromFirstMeasurement, meterDataFromLastMeasurement } = responseOnTurnOn;

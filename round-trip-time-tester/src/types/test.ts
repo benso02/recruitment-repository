@@ -12,7 +12,7 @@ export type TestParameters = {
   deviceIds?: string[];
   deviceId?: string;
   isBatchTest?: boolean;
-  
+  modeOn?: boolean;
 };
 
 export type RoundTripTestResponse = {

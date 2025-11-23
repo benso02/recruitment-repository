@@ -2,8 +2,8 @@
 I started by taking a good time to make it run locally, as there were a lot of dependecies and devices I did not have access to. I created a stub of @beam/storage and created a tsconfig.json, .env and a package.json file. After doing these things I was able to run it locally using "npm run start", but got these 2 lines repeating in the terminal: 
 Client beam_tester_mqtt_1863d6cf02e18 error AggregateError (broker: mqtt://localhost:1883)
 Client beam_tester_mqtt_1863d6cf02e18 is now offline (broker: mqtt://localhost:1883).
-I created the first draft of turnOffDevicesAndVerifyResponse, forked the turnOnDevicesAndVerifyResponse function and changes names and made it publish off instead. 
-
+I created the first draft of turnOffDevicesAndVerifyResponse, forked the turnOnDevicesAndVerifyResponse function and changes names and made it publish off instead. After I was satisfied with how the turnOffDevicesAndVerifyResponse worked I got started on making it work together so I could get a round trip test and cleaning the code. I added a new param in the rest endpoint '/runRttTest' called modeOn which is a boolean variable that if it is not declared is automatically true and runs the turnOn test and if it is declared false it runs the turnOff function. 
+I decided to make it so turnOnDevicesAndVerifyResponse handles both cases so, I have kept the code in for the turnOffDevicesAndVerifyResponse but commented it out at the bottom of controlDevice
 
 
 # Description

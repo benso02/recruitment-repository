@@ -36,7 +36,7 @@ const runRttTest = async (ctx: Context) => {
 };
 
 const validateBody = (parameters: Partial<TestParameters>): TestParameters => {
-  const { deviceId, isBatchTest, iterations, boostTimeSeconds } = parameters;
+  const { deviceId, isBatchTest, iterations, boostTimeSeconds, modeOn } = parameters;
 
   if (!deviceId && !isBatchTest) {
     throw new Error(`Missing required either field 'deviceId' or 'isBatchTest'`);
@@ -51,6 +51,7 @@ const validateBody = (parameters: Partial<TestParameters>): TestParameters => {
     boostTimeSeconds: boostTimeSeconds ?? DEFAULT_BOOST_TIME_S,
     deviceId,
     isBatchTest,
+    modeOn: modeOn ?? true,
   };
 
   return parametersWithDefaults;

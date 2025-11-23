@@ -12,9 +12,9 @@ export const turnOnDevicesAndVerifyResponse = async (
   storage: StorageAdapter,
   messageAdapter: DeviceMessageAdapter,
   deviceId: string,
-  boostTimeSeconds: number
+  boostTimeSeconds: number,
+  modeOn: boolean
 ) => {
-
   const { meter_id, relay_id, measurement_factor = 1 } = await storage.deviceState.findOne({id: deviceId});
 
   const isSingleDevice = relay_id === meter_id;
@@ -25,14 +25,21 @@ export const turnOnDevicesAndVerifyResponse = async (
     throw new Error('Test Error! Power data waiting time crossed the limit.');
   }
 
-  const powerBeforeActivation = meterDataBeforeActivation.power * measurement_factor;
-
-  if (powerBeforeActivation > RESPONSE_THRESHOLD_IN_WATTS) {
-    return;
+  const powerBefore= meterDataBeforeActivation.power * measurement_factor;
+  let mode : string;
+  
+  if (modeOn) {
+    mode = "on";
+    if (powerBefore > RESPONSE_THRESHOLD_IN_WATTS) return;
   }
+  else if (!modeOn) {
+    mode = "off";
+    if( powerBefore < RESPONSE_BOTTOM_IN_WATTS) return;
+  }
+  console.log(`Sending command to turn ${mode} the device ${deviceId}`);
 
   const messageSentAt = messageAdapter
-    .publishDeviceMessage(storage, deviceId, 'on', boostTimeSeconds, isSingleDevice)
+    .publishDeviceMessage(storage, deviceId, mode, boostTimeSeconds, isSingleDevice)
     .messageSentAt.getTime();
 
   const meterDataFromFirstMeasurement = await retrieveFirstMeasurementAfterCommand(storage, messageSentAt, meter_id);
@@ -101,6 +108,5 @@ export const turnOffDevicesAndVerifyResponse = async (
   if (!meterDataFromLastMeasurement || !meterDataFromFirstMeasurement) {
     throw new Error('Test Error! Power data waiting time crossed the limit.');
   }
-
   return {meterDataFromFirstMeasurement, meterDataFromLastMeasurement,messageSentAt};
 };

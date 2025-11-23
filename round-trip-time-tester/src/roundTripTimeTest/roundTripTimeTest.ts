@@ -11,7 +11,7 @@ import {
 } from '@src/types';
 import { formatResponseTimeResults } from '../util';
 import { DeviceMessageAdapter } from '@src/deviceMessage/adapter';
-import { turnOnDevicesAndVerifyResponse, turnOffDevicesAndVerifyResponse } from '@src/controlDevice/controlDevice';
+import { turnOnDevicesAndVerifyResponse } from '@src/controlDevice/controlDevice';
 
 export const startRttTest = async (
   storage: StorageAdapter,
@@ -30,19 +30,19 @@ export const startRttTest = async (
 
       for (let i = 0; i < iterations; i++) {
         console.log(`Iteration ${i + 1}...`);
-
-        const responseOnTurnOn = await turnOffDevicesAndVerifyResponse(
-          storage,
+      
+        const result = await turnOnDevicesAndVerifyResponse(storage,
           messageAdapter,
           device.id,
-          boostTimeSeconds
+          boostTimeSeconds,
+          parameters.modeOn
         );
 
-        if (!responseOnTurnOn) {
+        if (!result) {
           throw new Error(`The device: ${device.id} is already on, so RTT results cannot be verified`);
         }
 
-        const { messageSentAt, meterDataFromFirstMeasurement, meterDataFromLastMeasurement } = responseOnTurnOn;
+        const { messageSentAt, meterDataFromFirstMeasurement, meterDataFromLastMeasurement } = result;
 
         console.log(`Command Sent Timestamp: ${messageSentAt}`);
 
